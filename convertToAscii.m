@@ -7,7 +7,7 @@ color = false;
 imgSize = size(image);
 if size(image,3)==3
     %Color Image
-    adjIntensity = zeros(img_size(1), img_size(2), img_size(3));
+    adjIntensity = zeros(imgSize(1), imgSize(2));
     color = true;
     for i=1:imgSize(1)
         for j=1:imgSize(2)
@@ -25,7 +25,7 @@ for i=1:imgSize(1)
     for j=1:imgSize(2)
         %Convert range from 0-255 (normal pixel values) to 0-65 (ASCII
         %values that we have avalible to us)
-        adjIntensity(i,j) = (((adjIntensity(i,j)-0)*length(characters))/256)+0;
+        adjIntensity(i,j) = fix(((adjIntensity(i,j)-0)*length(characters))/256)+0;
     end
 end
 asciiMat = char(imgSize(1),imgSize(2));
