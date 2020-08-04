@@ -1,8 +1,11 @@
-function [ascii_mat] = im2ascii(filename, cols, scale)
+function [ascii_mat] = im2ascii(filename, cols, scale, do_large_ramp, do_histeq, do_sharpen)
 %IM2ASCII Outputs ASCII file for image input.
 %   filename: string path to image input
 %   cols: number of columns to use in ascii output
 %   scale: ratio of width to height for font (0.43 default)
+%   do_large_ramp: bool use larger range of ASCII characters
+%   do_histeq: Normalize intensity into 64 bin histogram
+%   do_sharpen: Apply UnSharp mask to the image
 %
 %   References technique: 
 %   https://www.geeksforgeeks.org/converting-image-ascii-image-python/
@@ -10,11 +13,23 @@ function [ascii_mat] = im2ascii(filename, cols, scale)
 large_ramp = '$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,"^`''. ';
 small_ramp = '@%#*+=-:. ';
 
-ramp = small_ramp;
+if(do_large_ramp)
+    ramp = large_ramp;
+else
+    ramp = small_ramp;
+end
 
 % Read Image and Comvert to Grayscale
 image = imread(filename);
 image = rgb2gray(image);
+
+% Do the preprocessing
+if(do_histeq)
+    image = histeq(image);
+end
+if(do_sharpen)
+    image = imsharpen(image);
+end
 
 % Find image dimensions
 width = size(image, 2);
@@ -29,8 +44,8 @@ rows = fix(height / t_height);
 
 % Make sure the image isn't too small
 if(cols > width || rows > height)
-    fprintf('Image too small for %d columns.', cols);
-    return
+    ME = MException('Image too small for %d columns.', cols);
+    throw(ME);
 end
 
 % Do the conversion
