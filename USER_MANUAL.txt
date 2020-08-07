@@ -1,0 +1,63 @@
+-----ASCII Art Generator User Manual-------------------------------------------
+
+Created by Brian Hurley & Jordan Blackadar
+Professor: Dr. Ming Zhang
+Class: COMP-3800-07 Image Processing
+
+-------------------------------------------------------------------------------
+HOW TO USE
+
+1. Open the file "gui.mlapp" using MATLAB version 2019a or later. 
+
+2. Click on the "Source" button on the top right and select your input image.
+
+3. Adjust any settings on the bottom to your preference, the default settings
+work well for most images. See the settings section below for more info. 
+
+4. Select the "Process" button on the right to generate the ASCII art from the
+image, the result will be saved to the same directory the image is from. 
+
+5. Select "Open Results" to launch notepad.exe and open the resulting .txt 
+file from your most recent run. 
+
+6. (Optional) Select the "Show Intermediates" button to show the pre-processing
+steps that were taken on the image before it was converted to ASCII characters.
+
+-------------------------------------------------------------------------------
+TEST IMAGES
+
+All test images are located in the "data" folder with the results as .txt files
+located in the "results" folder. The photos named "challenge_X.png" show the 
+intermediate pre-processing steps that are taken before the image is converted
+into ASCII. All results except for "wit.jpg.txt" were run using the default 
+settings, "wit.jpg.txt" was run with Output Columns set to 256. 
+
+-------------------------------------------------------------------------------
+SETTINGS
+
+Ramp Size: Set to "Small" or "Large", this allows you to pick if you would like
+to use a wider or smaller range of ASCII characters when converting the pixel
+intensities to ASCII. 
+
+Histogram Equlization: Enable this to even out the contrast in the image, this
+is useful if the input image is either too bright or too dark. 
+
+UnSharp Masking: Enable this to sharpen the edges of the image, this makes the
+edges much clearer to see when the image is converted to ASCII.
+
+Output Columns: Set to a values within the range of 1-1000, this sets the 
+number of columns of ASCII characters in the resulting .txt file. Limited due
+to MATLAB performance reasons. 
+
+Scale: Set to a value from 0.0-1.0 to adjust the aspect ratio of the resulting
+ASCII art. 
+
+-------------------------------------------------------------------------------
+IMPORTANT NOTES
+
+- Make sure that when you are viewing the resulting .txt files that you have 
+notepad or any other text editor set to not have "word wrap" enabled. 
+
+- Some fonts have different spacing and this can cause the ASCII art to look
+malformed, we recommned you use the font Consolas to avoid this. 
+
